@@ -142,11 +142,12 @@ async def main():
 
     scheduler = AsyncIOScheduler(timezone=TIMEZONE)
     scheduler.add_job(
-        lambda: asyncio.create_task(enviar_lembrete(bot)),
+        enviar_lembrete,
         "cron",
         day_of_week="mon-sat",
         hour="16-21",
-        minute="0,30"
+        minute="0,30",
+        args=[bot]
     )
     scheduler.start()
 
